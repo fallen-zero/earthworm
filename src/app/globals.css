@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 12px;
+}
+
+body {
+  @apply text-fuchsia-500 bg-[#1e1f35];
+}
