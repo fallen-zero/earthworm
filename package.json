@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && next build",
+    "build": "npm run generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "generate": "npx prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
