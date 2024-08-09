@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -17,15 +16,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <div className='flex flex-col'>
-          <div className='mb-20'>
-            <Header />
-          </div>
-          <div className='mb-18 mt-20'>{children}</div>
-          <div className='fexed bottom-10 mt-12 pt-20 ml-24 pl-96'></div>
-        </div>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

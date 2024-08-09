@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-06 10:04:54
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-09 12:00:07
+ * @LastEditTime : 2024-08-09 16:42:08
  * @FilePath     : /earthworm/scripts/parsePdf.js
  * @FileName     :
  */
@@ -11,15 +11,18 @@ const pdf = require('pdf-parse');
 
 const currentCourseFileName = '02';
 
-function main() {
-  const dataBuffer = fs.readFileSync(`./pdf/${currentCourseFileName}.pdf`);
+const pdfDir = './pdf';
+const jsonDir = './courses';
 
-  pdf(dataBuffer).then(function (data) {
-    const result = parse(data.text);
-    fs.writeFileSync(
-      `./courses/${currentCourseFileName}.json`,
-      JSON.stringify(result)
-    );
+function main() {
+  const files = fs.readdirSync(pdfDir);
+  files.forEach((file) => {
+    const dataBuffer = fs.readFileSync(`${pdfDir}/${file}`);
+    pdf(dataBuffer).then(function (data) {
+      const result = parse(data.text);
+      const fileName = file.replace('.pdf', '.json');
+      fs.writeFileSync(`${jsonDir}/${fileName}`, JSON.stringify(result));
+    });
   });
 }
 
@@ -107,7 +110,18 @@ function parseEnglishAndSoundMark(text) {
     .slice(0, soundMarkdStartIndex === -1 ? list.length : soundMarkdStartIndex)
     .join(' ')
     .trim();
-  const soundmark = list.slice(soundMarkdStartIndex).join(' ').trim();
+
+  soundmark = `/${list
+    .slice(soundMarkdStartIndex)
+    .join(' ')
+    .trim()
+    .split('/')
+    .map((t) => {
+      return t.trim().replace(/\s+/g, ' ');
+    })
+    .filter(Boolean)
+    .toString()
+    .replace(/,/g, '/ /')}/`;
 
   return { english, soundmark };
 }
