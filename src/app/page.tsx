@@ -11,23 +11,13 @@ export default function Home() {
   const [currentMode, setCurrentMode] = useState<'question' | 'answer'>(
     'question'
   );
-  const [
-    currentCourse,
-    statementIndex,
-    setStatementIndex,
-    toNextStatement,
-    fetchCourse,
-    getCurrentStatement,
-    checkCorrect,
-  ] = useCourse((state) => [
-    state.currentCourse,
-    state.statementIndex,
-    state.setStatementIndex,
-    state.toNextStatement,
-    state.fetchCourse,
-    state.getCurrentStatement,
-    state.checkCorrect,
-  ]);
+  const [toNextStatement, fetchCourse, getCurrentStatement, checkCorrect] =
+    useCourse((state) => [
+      state.toNextStatement,
+      state.fetchCourse,
+      state.getCurrentStatement,
+      state.checkCorrect,
+    ]);
   const [increaseFailedCount, resetFailedCount] = useFailedCount((state) => [
     state.increaseFailedCount,
     state.resetFailedCount,
