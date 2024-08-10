@@ -2,7 +2,6 @@
 
 import Answer from '@/components/Answer';
 import Header from '@/components/Header';
-import Header from '@/components/Header';
 import Question from '@/components/Question';
 import Statistics from '@/components/Statistics';
 import useCourse from '@/stores/useCourse';

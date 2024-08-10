@@ -2,8 +2,8 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 10:53:58
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-11 00:29:22
- * @FilePath     : /2024/HenryTSZ/english-learn-app/earthworm/src/stores/useCourse.ts
+ * @LastEditTime : 2024-08-11 00:41:30
+ * @FilePath     : /earthworm/src/stores/useCourse.ts
  * @FileName     :
  */
 
@@ -17,7 +17,6 @@ interface CourseData extends Course {
 
 interface State {
   statementIndex: number;
-  currentCourse?: CourseData;
   currentCourse?: CourseData;
 }
 
@@ -34,7 +33,6 @@ const useCourse = create(
     (set, get) => ({
       statementIndex: 0,
       currentCourse: void 0,
-      currentCourse: void 0,
       setStatementIndex(index) {
         set({ statementIndex: index });
       },
@@ -42,9 +40,7 @@ const useCourse = create(
         set((state) => {
           const nextStatementIndex = state.statementIndex + 1;
           const statements = state.currentCourse?.statements;
-          const statements = state.currentCourse?.statements;
 
-          if (!statements || nextStatementIndex >= statements.length) {
           if (!statements || nextStatementIndex >= statements.length) {
             return {
               statementIndex: 0,
@@ -64,7 +60,6 @@ const useCourse = create(
       },
       getCurrentStatement() {
         const { currentCourse, statementIndex } = get();
-        return currentCourse?.statements?.[statementIndex];
         return currentCourse?.statements?.[statementIndex];
       },
       checkCorrect(input) {
