@@ -1,6 +1,10 @@
+import useCourse from '@/stores/useCourse';
+import Link from 'next/link';
 import { memo } from 'react';
 
 function Header() {
+  const currentCourse = useCourse((state) => state.currentCourse);
+
   return (
     <header className='container z-20 mx-auto w-full px-10 py-6'>
       <div className='flex w-full flex-col items-center justify-between space-y-3 lg:flex-row lg:space-y-0'>
@@ -13,12 +17,12 @@ function Header() {
         <nav className='flex w-auto content-center items-center justify-end space-x-3 rounded-xl bg-gray-50 p-4 transition-colors duration-300 dark:bg-gray-800'>
           <div className='relative'>
             <div>
-              <a
+              <Link
                 className='block rounded-lg px-3 py-1 text-lg transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white focus:outline-none dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100'
-                href=''
+                href={`/course`}
               >
-                第一课
-              </a>
+                {currentCourse?.title}
+              </Link>
             </div>
           </div>
           <div className='flex items-center justify-center gap-2'>

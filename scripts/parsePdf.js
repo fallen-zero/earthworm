@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-06 10:04:54
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-09 16:42:08
+ * @LastEditTime : 2024-08-10 23:57:01
  * @FilePath     : /earthworm/scripts/parsePdf.js
  * @FileName     :
  */
@@ -15,31 +15,41 @@ const pdfDir = './pdf';
 const jsonDir = './courses';
 
 function main() {
-  const files = fs.readdirSync(pdfDir);
+  const files = fs
+    .readdirSync(pdfDir)
+    .filter((fileName) => !fileName.startsWith('.'))
+    .map((fileName) => fileName.replace(/\.pdf$/g, ''));
   files.forEach((file) => {
-    const dataBuffer = fs.readFileSync(`${pdfDir}/${file}`);
-    pdf(dataBuffer).then(function (data) {
-      const result = parse(data.text);
-      const fileName = file.replace('.pdf', '.json');
-      fs.writeFileSync(`${jsonDir}/${fileName}`, JSON.stringify(result));
-    });
+    createJsonByName(file);
   });
 }
 
 main();
 
+function createJsonByName(file) {
+  const dataBuffer = fs.readFileSync(`${pdfDir}/${file}.pdf`);
+  pdf(dataBuffer).then(function (data) {
+    const result = parse(data.text);
+    fs.writeFileSync(`${jsonDir}/${file}.json`, JSON.stringify(result));
+  });
+}
+
 const STARTSIGH = '中文 英文 K.K.音标';
+const ENDSIGH = '中文 原形 第三人称单数 过去式';
 
 function parse(text) {
   // 0. 先基于 \n 来切分成数组
   const rawTextList = text.split('\n').map((t) => t.trim());
   // 1. 先获取到开始的点
   const startIndex = rawTextList.findIndex((t) => t === STARTSIGH);
+  const endIndex = rawTextList.findIndex((t) =>
+    new RegExp(`^${ENDSIGH}`).test(t)
+  );
   // 2. 过滤掉没有用的数据
   //   1. 空的
   //   2. 只有 number 的 （这个时换页符）
   const textList = rawTextList
-    .slice(startIndex + 1)
+    .slice(startIndex + 1, endIndex)
     .filter((t) => t && !/\d/.test(Number(t)));
 
   // 对齐格式
@@ -120,8 +130,7 @@ function parseEnglishAndSoundMark(text) {
       return t.trim().replace(/\s+/g, ' ');
     })
     .filter(Boolean)
-    .toString()
-    .replace(/,/g, '/ /')}/`;
+    .join('/ /')}/`;
 
   return { english, soundmark };
 }

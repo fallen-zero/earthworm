@@ -12,26 +12,35 @@ export default function Home() {
   const [currentMode, setCurrentMode] = useState<'question' | 'answer'>(
     'question'
   );
-  const [toNextStatement, fetchCourse, getCurrentStatement, checkCorrect] =
-    useCourse((state) => [
-      state.toNextStatement,
-      state.fetchCourse,
-      state.getCurrentStatement,
-      state.checkCorrect,
-    ]);
+  const [
+    currentCourse,
+    toNextStatement,
+    fetchCourse,
+    getCurrentStatement,
+    checkCorrect,
+  ] = useCourse((state) => [
+    state.currentCourse,
+    state.toNextStatement,
+    state.fetchCourse,
+    state.getCurrentStatement,
+    state.checkCorrect,
+  ]);
   const [increaseFailedCount, resetFailedCount] = useFailedCount((state) => [
     state.increaseFailedCount,
     state.resetFailedCount,
   ]);
 
   useEffect(() => {
-    fetchCourse();
-  }, [fetchCourse]);
+    if (!currentCourse) {
+      const firstCourseId = 'clzmar70v00662e3dj86e0azk';
+      fetchCourse(firstCourseId);
+    }
+  }, [fetchCourse, currentCourse]);
 
   const {
     chinese = '',
     english = '',
-    soundMark = '',
+    soundmark = '',
   } = getCurrentStatement() ?? {};
 
   function handleToNextStatement() {
@@ -68,7 +77,7 @@ export default function Home() {
                     ) : (
                       <Answer
                         word={english}
-                        soundmark={soundMark}
+                        soundmark={soundmark}
                         onToNextStatement={handleToNextStatement}
                       ></Answer>
                     )}

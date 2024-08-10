@@ -2,22 +2,16 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 10:53:58
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-09 14:58:37
+ * @LastEditTime : 2024-08-10 22:45:11
  * @FilePath     : /earthworm/src/stores/useCourse.ts
  * @FileName     :
  */
 
+import { Course, Statement } from '@prisma/client';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-interface Statement {
-  chinese: string;
-  english: string;
-  soundMark: string;
-}
-
-interface CourseData {
-  name: string;
+interface CourseData extends Course {
   statements: Statement[];
 }
 
@@ -29,7 +23,7 @@ interface State {
 interface Action {
   setStatementIndex: (index: number) => void;
   toNextStatement: () => void;
-  fetchCourse: () => Promise<void>;
+  fetchCourse: (courseId: CourseData['id']) => Promise<void>;
   getCurrentStatement: () => Statement | undefined;
   checkCorrect: (input: string) => boolean;
 }
@@ -57,11 +51,8 @@ const useCourse = create(
           };
         });
       },
-      async fetchCourse() {
-        // TODO 先写死第一课的 courseId
-        // 后续需要基于 courses 获取
-        const firstCourseId = 'clzmar70v00662e3dj86e0azk';
-        const response = await fetch(`/course/api/${firstCourseId}`);
+      async fetchCourse(courseId) {
+        const response = await fetch(`/course/api/${courseId}`);
         const data = await response.json();
         set({
           currentCourse: data.data,
