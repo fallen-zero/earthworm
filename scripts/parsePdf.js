@@ -2,8 +2,8 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-06 10:04:54
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-10 23:57:01
- * @FilePath     : /earthworm/scripts/parsePdf.js
+ * @LastEditTime : 2024-08-11 00:27:09
+ * @FilePath     : /2024/HenryTSZ/english-learn-app/earthworm/scripts/parsePdf.js
  * @FileName     :
  */
 const fs = require('fs');
