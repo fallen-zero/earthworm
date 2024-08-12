@@ -8,6 +8,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATEBASE_URL")
+//   // url       = env("POSTGRES_PRISMA_URL")
+// }
+
 datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_PRISMA_URL")
@@ -20,6 +26,8 @@ model Course {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   statements Statement[]
+
+  @@map("courses")
 }
 
 model Statement {
@@ -32,4 +40,6 @@ model Statement {
   courseId  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("statements")
 }

@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 10:53:58
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-11 00:41:30
+ * @LastEditTime : 2024-08-12 16:47:00
  * @FilePath     : /earthworm/src/stores/useCourse.ts
  * @FileName     :
  */
@@ -23,7 +23,7 @@ interface State {
 interface Action {
   setStatementIndex: (index: number) => void;
   toNextStatement: () => void;
-  fetchCourse: (courseId: CourseData['id']) => Promise<void>;
+  fetchCourse: (courseId?: CourseData['id']) => Promise<void>;
   getCurrentStatement: () => Statement | undefined;
   checkCorrect: (input: string) => boolean;
 }
@@ -52,6 +52,13 @@ const useCourse = create(
         });
       },
       async fetchCourse(courseId) {
+        if (!courseId) {
+          const response = await fetch(`/course/api`);
+          const course = await response.json();
+          const id = course.data[0]?.id;
+          !!id && get().fetchCourse(id);
+          return;
+        }
         const response = await fetch(`/course/api/${courseId}`);
         const data = await response.json();
         set({

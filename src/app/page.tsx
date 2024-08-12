@@ -32,8 +32,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!currentCourse) {
-      const firstCourseId = 'clzmar70v00662e3dj86e0azk';
-      fetchCourse(firstCourseId);
+      fetchCourse();
     }
   }, [fetchCourse, currentCourse]);
 
