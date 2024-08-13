@@ -32,6 +32,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!currentCourse) {
+      console.log('currentCourse', currentCourse);
       fetchCourse();
     }
   }, [fetchCourse, currentCourse]);

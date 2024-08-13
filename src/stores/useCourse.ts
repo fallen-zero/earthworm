@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 10:53:58
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-12 16:47:00
+ * @LastEditTime : 2024-08-13 09:09:09
  * @FilePath     : /earthworm/src/stores/useCourse.ts
  * @FileName     :
  */
@@ -55,7 +55,7 @@ const useCourse = create(
         if (!courseId) {
           const response = await fetch(`/course/api`);
           const course = await response.json();
-          const id = course.data[0]?.id;
+          const id = course.data?.[0]?.id;
           !!id && get().fetchCourse(id);
           return;
         }

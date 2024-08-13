@@ -1,4 +1,5 @@
 import useCourse from '@/stores/useCourse';
+import Image from 'next/image';
 import Link from 'next/link';
 import { memo } from 'react';
 
@@ -10,9 +11,15 @@ function Header() {
       <div className='flex w-full flex-col items-center justify-between space-y-3 lg:flex-row lg:space-y-0'>
         <a
           className='flex items-center text-2xl font-bold text-indigo-500 no-underline hover:no-underline lg:text-4xl'
-          href='https://earthworm-six.vercel.app/main'
+          href='https://earthworm-six.vercel.app'
         >
-          <h1>Earth Worm</h1>
+          <Image
+            src='/images/tiger.png'
+            width={30}
+            height={30}
+            alt='logo'
+          />
+          <h1 className='ml-4'>Earth Worm</h1>
         </a>
         <nav className='flex w-auto content-center items-center justify-end space-x-3 rounded-xl bg-gray-50 p-4 transition-colors duration-300 dark:bg-gray-800'>
           <div className='relative'>

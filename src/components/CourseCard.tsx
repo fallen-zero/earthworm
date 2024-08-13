@@ -7,14 +7,24 @@ import { memo } from 'react';
 
 function CourseCard({ course }: { course: Course }) {
   const router = useRouter();
-  const fetchCourse = useCourse((state) => state.fetchCourse);
+  const [fetchCourse, setStatementIndex] = useCourse((state) => [
+    state.fetchCourse,
+    state.setStatementIndex,
+  ]);
   async function handleClick(id: Course['id']) {
+    console.log('id', id);
     await fetchCourse(id);
+    setStatementIndex(0);
     router.push(`/`);
   }
   return (
     <>
-      <button onClick={() => handleClick(course.id)}>{course.title}</button>
+      <button
+        className='size-full flex items-center justify-center text-2xl font-[楷体] rounded-lg bg-cyan-900 hover:bg-cyan-500 cursor-pointer duration-200'
+        onClick={() => handleClick(course.id)}
+      >
+        {course.title}
+      </button>
     </>
   );
 }
