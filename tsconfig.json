@@ -27,6 +27,9 @@
       ],
       "@lib/*": [
         "./lib/*"
+      ],
+      "@http": [
+        "./src/apis/config/index.ts"
       ]
     }
   },

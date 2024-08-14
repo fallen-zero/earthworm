@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-12 15:49:12
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-13 14:29:54
+ * @LastEditTime : 2024-08-14 14:04:45
  * @FilePath     : /earthworm/prisma/seed.ts
  * @FileName     :
  */

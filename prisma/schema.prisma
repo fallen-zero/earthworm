@@ -23,8 +23,8 @@ datasource db {
 model Course {
   id         String      @id @default(cuid())
   title      String
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
   statements Statement[]
 
   @@map("courses")
@@ -37,9 +37,9 @@ model Statement {
   soundmark String
   order     Int
   Course    Course?  @relation(fields: [courseId], references: [id])
-  courseId  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  courseId  String?  @map("course_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("statements")
 }

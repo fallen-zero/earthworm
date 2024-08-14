@@ -1,3 +1,4 @@
+import { uniqueId } from 'lodash-es';
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -59,7 +60,7 @@ function TrimInputer({
       <ul className='flex items-center justify-center flex-wrap'>
         {textList.map((text) => (
           <li
-            key={crypto.randomUUID()}
+            key={uniqueId()}
             className='w-fit min-w-20 border-b-2 border-blue-200 border-solid py-3 px-5 h-16 leading-10 mr-3 mt-3 last:mr-0 last:border-blue-500 text-center'
           >
             {text}
