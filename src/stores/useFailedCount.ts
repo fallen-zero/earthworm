@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 11:54:16
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-07 13:59:31
+ * @LastEditTime : 2024-08-14 17:12:42
  * @FilePath     : /earthworm/src/stores/useFailedCount.ts
  * @FileName     :
  */
@@ -27,7 +27,6 @@ const useFailedCount = create<State & Action>((set) => ({
       const nextCount = state.count + 1;
       if (nextCount >= failedCountTotal) {
         callback();
-        return { count: 0 };
       }
       return { count: nextCount };
     });
