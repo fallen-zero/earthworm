@@ -1,4 +1,4 @@
-import { coursesApi } from '@/apis/modules/course.';
+import { coursesApi } from '@/apis/modules/course';
 import CourseCard from '@/components/CourseCard';
 
 export default async function Course() {
