@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-07 10:53:58
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-13 09:09:09
+ * @LastEditTime : 2024-08-14 16:56:27
  * @FilePath     : /earthworm/src/stores/useCourse.ts
  * @FileName     :
  */
@@ -71,6 +71,11 @@ const useCourse = create(
       },
       checkCorrect(input) {
         const { getCurrentStatement } = get();
+        console.log(
+          input,
+          getCurrentStatement()?.english,
+          input === getCurrentStatement()?.english
+        );
         return input === getCurrentStatement()?.english;
       },
     }),

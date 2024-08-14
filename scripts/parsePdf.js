@@ -2,8 +2,8 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-06 10:04:54
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-11 00:27:09
- * @FilePath     : /2024/HenryTSZ/english-learn-app/earthworm/scripts/parsePdf.js
+ * @LastEditTime : 2024-08-14 17:00:58
+ * @FilePath     : /earthworm/scripts/parsePdf.js
  * @FileName     :
  */
 const fs = require('fs');
@@ -119,7 +119,8 @@ function parseEnglishAndSoundMark(text) {
   const english = list
     .slice(0, soundMarkdStartIndex === -1 ? list.length : soundMarkdStartIndex)
     .join(' ')
-    .trim();
+    .trim()
+    .replace(/\s+/g, ' ');
 
   soundmark = `/${list
     .slice(soundMarkdStartIndex)
