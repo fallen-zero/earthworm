@@ -2,7 +2,7 @@
  * @Author       : fallen_zero
  * @Date         : 2024-08-14 10:32:47
  * @LastEditors  : fallen_zero
- * @LastEditTime : 2024-08-14 16:10:29
+ * @LastEditTime : 2024-08-14 16:39:20
  * @FilePath     : /earthworm/src/apis/config/index.ts
  * @FileName     :
  */
@@ -37,16 +37,15 @@
 
 const http = {
   async get<T>(url: string): Promise<T> {
-    try {
-      const res = await fetch(`${process.env.NEXT_BASE_PATH}${url}`);
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      throw error;
-    }
+    // const res = await fetch(`${process.env.NEXT_BASE_PATH}${url}`);
+    // if (!res.ok) {
+    //   throw new Error(res.statusText);
+    // }
+    // const data = await res.json();
+    // return data;
+    return {
+      data: [],
+    } as T;
   },
 };
 
