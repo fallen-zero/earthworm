@@ -1,8 +1,8 @@
-import { coursesApi } from '@/apis/modules/course';
+import { getCourseList } from '@/actions/course';
 import CourseCard from '@/components/CourseCard';
 
 export default async function Course() {
-  const { data: courses = [] } = await coursesApi();
+  const courses = await getCourseList();
 
   return (
     <div className='w-screen h-screen flex flex-col overflow-hidden p-20'>
